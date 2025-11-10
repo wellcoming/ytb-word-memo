@@ -1,107 +1,64 @@
-import { translate } from './translate';
-import { WordManager } from './word-manager';
+import { CaptionProcessor } from './processor';
+import { EventHandler } from './handler';
+import { WordManager } from './manager';
 import { Popup } from './popup';
-import { getWordBase } from './utils';
 
 class App {
     private popup: Popup;
     private wordManager: WordManager;
+    private processor: CaptionProcessor;
+    private handler: EventHandler;
 
     constructor() {
         this.popup = new Popup();
         this.wordManager = new WordManager();
+        this.processor = new CaptionProcessor(this.wordManager);
+        this.handler = new EventHandler(this.wordManager, this.popup);
     }
-    public start() {
+
+    public start(): void {
         this.startObserver();
     }
 
-    private startObserver() {
+    private startObserver(): void {
         const targetNode = document.querySelector('.ytp-caption-window-container');
         if (!targetNode) {
             setTimeout(() => this.startObserver(), 500);
             return;
         }
 
+        this.handler.attachTo(targetNode as HTMLElement);
+
         const observer = new MutationObserver(mutations => {
-            const captionWindow = targetNode.querySelector('.caption-window') as HTMLElement;
-            const currentLang = captionWindow?.lang || null;
-
-            if (!currentLang?.startsWith('en')) {
-                return;
-            }
-
-            for (const mutation of mutations) {
-                for (const node of Array.from(mutation.addedNodes)) {
-                    if (node.nodeType !== 1) continue;
-                    const segments = (node as HTMLElement).querySelectorAll('.ytp-caption-segment');
-                    for (const segment of Array.from(segments)) {
-                        const el = segment as HTMLElement;
-                        if (el.dataset.processed) continue;
-                        el.dataset.processed = 'true';
-                        this.processCaptionSegment(el);
-                    }
-                }
-            }
+            this.handleMutations(targetNode as HTMLElement, mutations);
         });
         observer.observe(targetNode, { childList: true, subtree: true });
         console.log("YouTube字幕观察器已启动，喵~");
     }
 
-    private processCaptionSegment(segment: HTMLElement) {
-        const originalText = segment.textContent || '';
-        segment.textContent = '';
-        const parts = originalText.split(/([\w]+(?:['’-][\w]+)*)/);
+    private handleMutations(targetNode: HTMLElement, mutations: MutationRecord[]): void {
+        const captionWindow = targetNode.querySelector('.caption-window') as HTMLElement;
+        if (!captionWindow?.lang?.startsWith('en')) return;
 
-        parts.forEach(part => {
-            segment.appendChild(this.createNodeForPart(part));
+        const segments = this.collectSegments(mutations);
+        segments.forEach(el => {
+            el.dataset.processed = 'true';
+            this.processor.processSegment(el);
         });
     }
 
-    private createNodeForPart(part: string): Node {
-        if (/^[a-zA-Z-’]+$/.test(part)) {
-            return this.createWordSpan(part);
+    private collectSegments(mutations: MutationRecord[]): HTMLElement[] {
+        const segments: HTMLElement[] = [];
+        for (const mutation of mutations) {
+            for (const node of Array.from(mutation.addedNodes)) {
+                if (node.nodeType !== Node.ELEMENT_NODE) continue;
+                const found = (node as HTMLElement).querySelectorAll('.ytp-caption-segment');
+                segments.push(...Array.from(found).filter(
+                    seg => !(seg as HTMLElement).dataset.processed
+                ) as HTMLElement[]);
+            }
         }
-
-        return document.createTextNode(part);
-    }
-
-    private createWordSpan(word: string): HTMLElement {
-        const span = document.createElement('span');
-        span.className = 'ytb-word-memo-word';
-
-        const wordBase = getWordBase(word.toLowerCase());
-        span.dataset.wordBase = wordBase;
-
-        const isKnown = this.wordManager.isWordKnown(wordBase);
-        span.classList.toggle('unknown', !isKnown);
-        span.textContent = word;
-
-        span.addEventListener('click', (event) => {
-            event.stopPropagation();
-
-            const newKnownState = !this.wordManager.isWordKnown(wordBase);
-            this.wordManager[newKnownState ? 'addWord' : 'removeWord'](wordBase);
-            this.wordManager.saveWords();
-
-            const allWordSpans = document.querySelectorAll(`.ytb-word-memo-word[data-word-base="${wordBase}"]`);
-            allWordSpans.forEach(s => {
-                s.classList.toggle('unknown', !newKnownState);
-            });
-
-            this.popup.hideImmediate();
-        });
-
-        span.addEventListener('mouseover', async (event) => {
-            this.popup.cancelHide();
-            const result = await translate(word);
-            this.popup.showWordResult(word, result, { x: event.clientX, y: event.clientY });
-        });
-
-        span.addEventListener('mouseout', () => {
-            this.popup.hideDelayed();
-        });
-
-        return span;
+        return segments;
     }
 }
 
