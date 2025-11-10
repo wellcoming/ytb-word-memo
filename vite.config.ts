@@ -8,7 +8,7 @@ export default defineConfig({
     monkey({
       entry: 'src/main.ts',
       userscript: {
-        name: 'Youtube Word Memo',
+        name: 'Youtube Word Memo - 看视频学单词',
         namespace: 'http://tampermonkey.net/',
         version: pkg.version,
         description: pkg.description,
