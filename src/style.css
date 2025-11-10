@@ -1,0 +1,67 @@
+/* Main Popup Styles */
+#word-popup {
+    position: fixed;
+    display: none;
+    z-index: 99999;
+    pointer-events: none;
+    font-family: sans-serif;
+    color: #333;
+}
+
+#word-popup .popup-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 350px;
+    background-color: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    line-height: 1.6;
+}
+
+#word-popup .popup-title {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: #111;
+}
+
+#word-popup .popup-phonetics {
+    margin: 0 0 15px 0;
+    color: #555;
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+#word-popup .popup-section-title {
+    font-size: 16px;
+    margin: 10px 0 5px 0;
+    color: #222;
+}
+
+#word-popup .popup-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #333;
+}
+
+#word-popup .popup-list li+li {
+    margin-top: 4px;
+}
+
+#word-popup .popup-error {
+    color: #d14343;
+    font-size: 14px;
+}
+
+#word-popup .popup-error b {
+    font-size: 16px;
+}
+
+/* Caption Word Span Styles */
+.ytb-word-memo-word {
+    cursor: pointer;
+}
+
+.ytb-word-memo-word.unknown {
+    color: #42e2f5 !important;
+    font-weight: bold !important;
+}

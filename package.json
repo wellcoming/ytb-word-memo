@@ -1,0 +1,35 @@
+{
+  "name": "ytb-word-memo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "在 YouTube 字幕中，认识的单词显示英文，不认识的显示中文，并可以随时添加和修改。",
+  "homepage": "https://github.com/wellcoming/ytb-word-memo",
+  "bugs": {
+    "url": "https://github.com/wellcoming/ytb-word-memo/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellcoming/ytb-word-memo.git"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "wellcoming",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/stemmer": "^2.0.0",
+    "@types/tampermonkey": "^5.0.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vite-plugin-monkey": "^7.1.4"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0",
+    "stemmer": "^2.0.1"
+  }
+}
