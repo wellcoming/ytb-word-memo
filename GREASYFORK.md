@@ -1,8 +1,6 @@
 # 📺 Youtube Word Memo - 看视频学单词
 
-这是一个简单实用的油猴脚本，可以帮助你
-
-![ytb-word-memo](https://socialify.git.ci/wellcoming/ytb-word-memo/image?custom_description=Learning+English+words+while+watching+YouTube+videos.&description=1&font=Bitter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
+这是一个简单实用的油猴脚本，可以帮助你一边看YouTube视频，一边学习和记忆英语单词。
 
 ### ✨ 主要功能
 

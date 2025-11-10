@@ -1,6 +1,8 @@
 # Youtube Word Memo
 
-[![AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) [![Greasy Fork](https://img.shields.io/greasyfork/v/YOUR_SCRIPT_ID.svg)](https://greasyfork.org/scripts/YOUR_SCRIPT_ID)
+[![CI](https://github.com/wellcoming/ytb-word-memo/actions/workflows/ci.yml/badge.svg)](https://github.com/wellcoming/ytb-word-memo/actions/workflows/ci.yml) [![AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0) [![Greasy Fork](https://img.shields.io/greasyfork/v/555387-youtube-word-memo.svg)](https://greasyfork.org/scripts/555387-youtube-word-memo)
+
+![ytb-word-memo](https://socialify.git.ci/wellcoming/ytb-word-memo/image?custom_description=Learning+English+words+while+watching+YouTube+videos.&description=1&font=Bitter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Auto)
 
 这是一个油猴脚本，旨在帮助用户通过观看 YouTube 视频学习和记忆英语单词。它会在 YouTube 的字幕中高亮不熟悉的单词，并提供即时翻译和标记功能。
 
