@@ -23,6 +23,13 @@ class App {
         }
 
         const observer = new MutationObserver(mutations => {
+            const captionWindow = targetNode.querySelector('.caption-window') as HTMLElement;
+            const currentLang = captionWindow?.lang || null;
+
+            if (!currentLang?.startsWith('en')) {
+                return;
+            }
+
             for (const mutation of mutations) {
                 for (const node of Array.from(mutation.addedNodes)) {
                     if (node.nodeType !== 1) continue;
@@ -63,41 +70,30 @@ class App {
         span.className = 'ytb-word-memo-word';
 
         const wordBase = getWordBase(word.toLowerCase());
-        let currentKnownState = this.wordManager.isWordKnown(word);
-        let translation = '';
+        span.dataset.wordBase = wordBase;
 
-        const updateDisplay = () => {
-            span.classList.toggle('unknown', !currentKnownState);
-            // span.textContent = !currentKnownState && translation ? translation : word;
-            span.textContent = word;
-        };
-
-        updateDisplay();
-
-        // 不认识的单词立即加载翻译
-        // if (!currentKnownState) {
-        //     translate(word).then(result => {
-        //         translation = result.translations?.[0]?.trim() || '';
-        //         updateDisplay();
-        //     }).catch(() => { });
-        // }
+        const isKnown = this.wordManager.isWordKnown(wordBase);
+        span.classList.toggle('unknown', !isKnown);
+        span.textContent = word;
 
         span.addEventListener('click', (event) => {
             event.stopPropagation();
-            currentKnownState = !currentKnownState;
-            this.wordManager[currentKnownState ? 'addWord' : 'removeWord'](wordBase);
+
+            const newKnownState = !this.wordManager.isWordKnown(wordBase);
+            this.wordManager[newKnownState ? 'addWord' : 'removeWord'](wordBase);
             this.wordManager.saveWords();
-            updateDisplay();
+
+            const allWordSpans = document.querySelectorAll(`.ytb-word-memo-word[data-word-base="${wordBase}"]`);
+            allWordSpans.forEach(s => {
+                s.classList.toggle('unknown', !newKnownState);
+            });
+
             this.popup.hideImmediate();
         });
 
         span.addEventListener('mouseover', async (event) => {
             this.popup.cancelHide();
             const result = await translate(word);
-            if (!translation) {
-                translation = result.translations?.[0]?.trim() || '';
-                updateDisplay();
-            }
             this.popup.showWordResult(word, result, { x: event.clientX, y: event.clientY });
         });
 
