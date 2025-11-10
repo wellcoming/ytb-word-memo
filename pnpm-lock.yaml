@@ -31,8 +31,8 @@ importers:
         specifier: ^7.1.12
         version: 7.1.12
       vite-plugin-monkey:
-        specifier: ^7.1.4
-        version: 7.1.4(postcss@8.5.6)(vite@7.1.12)
+        specifier: ^7.1.5
+        version: 7.1.5(postcss@8.5.6)(vite@7.1.12)
 
 packages:
 
@@ -515,8 +515,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  vite-plugin-monkey@7.1.4:
-    resolution: {integrity: sha512-nA/uWbLT3b0uyCFBV7bsIUn+OZCpPzymDX1Nx9btKrG7in06m0txbT2SipCZPZJZyyQHPFNLrCSrWsQIFDHDlg==}
+  vite-plugin-monkey@7.1.5:
+    resolution: {integrity: sha512-/4NRC6Dg+sgVhqtRhd9cscHeeQ7C+F0sZHqkV9SzACkzX1S4gW9dWoayr6HdUH6slm6GLVpwtfSAmTY/CLWUWA==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
     peerDependenciesMeta:
@@ -946,7 +946,7 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  vite-plugin-monkey@7.1.4(postcss@8.5.6)(vite@7.1.12):
+  vite-plugin-monkey@7.1.5(postcss@8.5.6)(vite@7.1.12):
     dependencies:
       acorn: 8.15.0
       acorn-walk: 8.3.4
