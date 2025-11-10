@@ -35,3 +35,4 @@ export class WordManager {
         GM_setValue('knownWords', Array.from(this.knownWords));
     }
 }
+

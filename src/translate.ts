@@ -3,6 +3,8 @@ import { GM_xmlhttpRequest } from '$';
 
 const BASE_URL = 'https://dict.youdao.com/jsonapi_s?doctype=json&jsonversion=4';
 
+const translationCache = new Map<string, TranslateResult>();
+
 type QueryPayload = Record<'q' | 'keyfrom' | 'sign' | 'client' | 't', string>;
 
 interface YoudaoResponse {
@@ -41,7 +43,12 @@ export interface TranslateResult {
 }
 
 export async function translate(text: string): Promise<TranslateResult> {
-    const normalized = text.trim();
+    const normalized = text.trim().toLowerCase();
+
+    if (translationCache.has(normalized)) {
+        return translationCache.get(normalized)!;
+    }
+
     if (!normalized) {
         return {
             text: normalized,
@@ -53,7 +60,9 @@ export async function translate(text: string): Promise<TranslateResult> {
 
     const payload = createQueryPayload(normalized);
     const data = await requestDefinition(payload);
-    return parseResponse(data);
+    const result = parseResponse(data);
+    translationCache.set(normalized, result);
+    return result;
 }
 
 function createQueryPayload(text: string): QueryPayload {

@@ -29,9 +29,9 @@ export class Popup {
         this.element.style.display = 'none';
     }
 
-    public showWordResult(word: string, result: TranslateResult, position: { x: number; y: number }) {
+    public showWordResult(word: string, result: TranslateResult, wordElement: HTMLElement) {
         this.renderContent(word, result);
-        this.positionPopup(position.x, position.y);
+        this.positionAboveElement(wordElement);
         this.element.style.display = 'block';
     }
 
@@ -58,20 +58,21 @@ export class Popup {
         this.element.appendChild(fragment);
     }
 
-    private positionPopup(clientX: number, clientY: number) {
-        let popupX = clientX + 15;
-        let popupY = clientY + 15;
+    private positionAboveElement(element: HTMLElement) {
+        const rect = element.getBoundingClientRect();
+        const popupRect = this.element.getBoundingClientRect();
 
-        if (popupX + this.element.offsetWidth > window.innerWidth - 20) {
-            popupX = clientX - this.element.offsetWidth - 15;
+        let left = rect.left + (rect.width - popupRect.width) / 2;
+        left = Math.max(10, Math.min(left, window.innerWidth - popupRect.width - 10));
+
+        let top = rect.top - popupRect.height - 8;
+
+        if (top < 10) {
+            top = rect.bottom + 8;
         }
 
-        if (popupY + this.element.offsetHeight > window.innerHeight - 20) {
-            popupY = window.innerHeight - this.element.offsetHeight - 20;
-        }
-
-        this.element.style.left = `${popupX}px`;
-        this.element.style.top = `${popupY}px`;
+        this.element.style.left = `${left}px`;
+        this.element.style.top = `${top}px`;
     }
 
     private clear() {
