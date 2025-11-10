@@ -1,7 +1,7 @@
 {
   "name": "ytb-word-memo",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "在 YouTube 字幕中，认识的单词显示英文，不认识的显示中文，并可以随时添加和修改。",
   "homepage": "https://github.com/wellcoming/ytb-word-memo",
