@@ -13,7 +13,11 @@ export default defineConfig({
         version: pkg.version,
         description: pkg.description,
         author: 'wellcoming',
-        match: '*://www.youtube.com/watch*',
+        match: [
+          '*://www.youtube.com/watch*',
+          '*://www.youtube.com',
+          '*://www.youtube.com/*'
+        ],
         icon: 'https://www.google.com/s2/favicons?sz=64&domain=youtube.com',
         connect: 'dict.youdao.com',
         license: 'AGPL-3.0'
