@@ -30,6 +30,12 @@ class App {
         this.handler.attachTo(targetNode as HTMLElement);
 
         const observer = new MutationObserver(mutations => {
+            if (!document.contains(targetNode)) {
+                console.log('YouTube字幕容器已移除，重新启动观察器');
+                observer.disconnect();
+                this.startObserver();
+                return;
+            }
             this.handleMutations(mutations);
         });
         observer.observe(targetNode, { childList: true, subtree: true });
