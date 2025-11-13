@@ -30,16 +30,13 @@ class App {
         this.handler.attachTo(targetNode as HTMLElement);
 
         const observer = new MutationObserver(mutations => {
-            this.handleMutations(targetNode as HTMLElement, mutations);
+            this.handleMutations(mutations);
         });
         observer.observe(targetNode, { childList: true, subtree: true });
         console.log("YouTube字幕观察器已启动，喵~");
     }
 
-    private handleMutations(targetNode: HTMLElement, mutations: MutationRecord[]): void {
-        const captionWindow = targetNode.querySelector('.caption-window') as HTMLElement;
-        if (!captionWindow?.lang?.startsWith('en')) return;
-
+    private handleMutations(mutations: MutationRecord[]): void {
         const segments = this.collectSegments(mutations);
         segments.forEach(el => {
             el.dataset.processed = 'true';
