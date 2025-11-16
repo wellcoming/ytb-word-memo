@@ -8,6 +8,7 @@ class App {
     private wordManager: WordManager;
     private processor: CaptionProcessor;
     private handler: EventHandler;
+    private currentTarget: Element | null = null;
 
     constructor() {
         this.popup = new Popup();
@@ -17,29 +18,20 @@ class App {
     }
 
     public start(): void {
-        this.startObserver();
+        setInterval(() => {
+            if (!this.currentTarget || !document.contains(this.currentTarget)) {
+                const target = document.querySelector('.ytp-caption-window-container');
+                if (target) this.startObserver(target);
+            }
+        }, 500);
     }
 
-    private startObserver(): void {
-        const targetNode = document.querySelector('.ytp-caption-window-container');
-        if (!targetNode) {
-            setTimeout(() => this.startObserver(), 500);
-            return;
-        }
-
+    private startObserver(targetNode: Element): void {
+        this.currentTarget = targetNode;
         this.handler.attachTo(targetNode as HTMLElement);
-
-        const observer = new MutationObserver(mutations => {
-            if (!document.contains(targetNode)) {
-                console.log('YouTube字幕容器已移除，重新启动观察器');
-                observer.disconnect();
-                this.startObserver();
-                return;
-            }
-            this.handleMutations(mutations);
-        });
-        observer.observe(targetNode, { childList: true, subtree: true });
-        console.log("YouTube字幕观察器已启动，喵~");
+        new MutationObserver(mutations => this.handleMutations(mutations))
+            .observe(targetNode, { childList: true, subtree: true });
+        console.log("YouTube字幕观察器已启动，喵~", targetNode);
     }
 
     private handleMutations(mutations: MutationRecord[]): void {
