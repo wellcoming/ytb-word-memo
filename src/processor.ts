@@ -2,8 +2,8 @@ import { WordManager } from './manager';
 import { getWordBase } from './utils';
 
 export class CaptionProcessor {
-    private static readonly WORD_SPLIT_REGEX = /([\w]+(?:[''-][\w]+)*)/;
-    private static readonly WORD_TEST_REGEX = /^[a-zA-Z-']+$/;
+    private static readonly WORD_SPLIT_REGEX = /([\w-']+)/;
+    private static readonly WORD_TEST_REGEX = /^[a-zA-Z]+(?:['-][a-zA-Z]+)*$/;
 
     constructor(private wordManager: WordManager) { }
 
