@@ -62,6 +62,6 @@
 }
 
 .ytb-word-memo-word.unknown {
-    color: #42e2f5 !important;
-    font-weight: bold !important;
+    color: #42e2f5;
+    text-shadow: 0 0 5px rgba(66, 226, 245, 0.8);
 }
