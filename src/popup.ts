@@ -31,8 +31,8 @@ export class Popup {
 
     public showWordResult(word: string, result: TranslateResult, wordElement: HTMLElement) {
         this.renderContent(word, result);
-        this.positionAboveElement(wordElement);
         this.element.style.display = 'block';
+        this.positionAboveElement(wordElement);
     }
 
     private renderContent(word: string, result: TranslateResult) {
@@ -62,14 +62,16 @@ export class Popup {
         const rect = element.getBoundingClientRect();
         const popupRect = this.element.getBoundingClientRect();
 
-        let left = rect.left + (rect.width - popupRect.width) / 2;
-        left = Math.max(10, Math.min(left, window.innerWidth - popupRect.width - 10));
+        // Horizontal: Center, clamp to window edges
+        const left = Math.max(10, Math.min(
+            rect.left + (rect.width - popupRect.width) / 2,
+            window.innerWidth - popupRect.width - 10
+        ));
 
-        let top = rect.top - popupRect.height - 8;
-
-        if (top < 10) {
-            top = rect.bottom + 8;
-        }
+        // Vertical: Default above (-10px). If too close to top (<10px), flip below
+        // Subtitles usually at bottom, so 'above' is preferred and safe
+        const topAbove = rect.top - popupRect.height - 10;
+        const top = topAbove < 10 ? rect.bottom + 10 : topAbove;
 
         this.element.style.left = `${left}px`;
         this.element.style.top = `${top}px`;
