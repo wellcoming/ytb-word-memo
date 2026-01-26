@@ -28,8 +28,8 @@ importers:
         specifier: ^7.3.1
         version: 7.3.1
       vite-plugin-monkey:
-        specifier: ^7.1.5
-        version: 7.1.5(postcss@8.5.6)(vite@7.3.1)
+        specifier: ^7.1.9
+        version: 7.1.9(postcss@8.5.6)(vite@7.3.1)
 
 packages:
 
@@ -358,12 +358,12 @@ packages:
   cuint@0.2.2:
     resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
 
-  default-browser-id@5.0.0:
-    resolution: {integrity: sha512-A6p/pu/6fyBcA1TRz/GqWYPViplrftcW2gZC9q79ngNCKAeR/X3gcEdXQHl4KNXV+3wgIJ1CPkJQ3IHM6lcsyA==}
+  default-browser-id@5.0.1:
+    resolution: {integrity: sha512-x1VCxdX4t+8wVfd1so/9w+vQ4vx7lKd2Qp5tDRutErwmR85OgmfX7RlLRMWafRMY7hbEiXIbudNrjOAPa/hL8Q==}
     engines: {node: '>=18'}
 
-  default-browser@5.3.0:
-    resolution: {integrity: sha512-Qq68+VkJlc8tjnPV1i7HtbIn7ohmjZa88qUvHMIK0ZKUXMCuV45cT7cEXALPUmeXCe0q1DWQkQTemHVaLIFSrg==}
+  default-browser@5.4.0:
+    resolution: {integrity: sha512-XDuvSq38Hr1MdN47EDvYtx3U0MTqpCEn+F6ft8z2vYDzMrvQhVp0ui9oQdqW3MvK3vqUETglt1tVGgjLuJ5izg==}
     engines: {node: '>=18'}
 
   define-lazy-prop@3.0.0:
@@ -387,8 +387,8 @@ packages:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
 
-  entities@6.0.1:
-    resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
+  entities@7.0.1:
+    resolution: {integrity: sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==}
     engines: {node: '>=0.12'}
 
   esbuild@0.27.2:
@@ -410,8 +410,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  htmlparser2@10.0.0:
-    resolution: {integrity: sha512-TwAZM+zE5Tq3lrEHvOlvwgj1XLWQCtaaibSN11Q+gGBAS7Y1uZSWwXXRe4iF6OXnaq1riyQAPFOBtYc77Mxq0g==}
+  htmlparser2@10.1.0:
+    resolution: {integrity: sha512-VTZkM9GWRAtEpveh7MSF6SjjrpNVNNVJfFup7xTY3UpFtm67foy9HDVXneLtFVt4pMz5kZtgNcvCniNFb1hlEQ==}
 
   import-meta-resolve@4.2.0:
     resolution: {integrity: sha512-Iqv2fzaTQN28s/FwZAoFq0ZSs/7hMAHJVX+w8PZl3cY19Pxk6jFFalxQoIfW2826i/fDLXv8IiEZRIT0lDuWcg==}
@@ -523,8 +523,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  vite-plugin-monkey@7.1.5:
-    resolution: {integrity: sha512-/4NRC6Dg+sgVhqtRhd9cscHeeQ7C+F0sZHqkV9SzACkzX1S4gW9dWoayr6HdUH6slm6GLVpwtfSAmTY/CLWUWA==}
+  vite-plugin-monkey@7.1.9:
+    resolution: {integrity: sha512-kYtcRH8DsbrwfugrviYRuk50weY5yyVKcuGRkjUSc7mK0uPFtOHK8sUSEecpiS9725IF/4uyum8bYHs7dswDBg==}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
     peerDependenciesMeta:
@@ -775,12 +775,12 @@ snapshots:
 
   cuint@0.2.2: {}
 
-  default-browser-id@5.0.0: {}
+  default-browser-id@5.0.1: {}
 
-  default-browser@5.3.0:
+  default-browser@5.4.0:
     dependencies:
       bundle-name: 4.1.0
-      default-browser-id: 5.0.0
+      default-browser-id: 5.0.1
 
   define-lazy-prop@3.0.0: {}
 
@@ -804,7 +804,7 @@ snapshots:
 
   entities@4.5.0: {}
 
-  entities@6.0.1: {}
+  entities@7.0.1: {}
 
   esbuild@0.27.2:
     optionalDependencies:
@@ -842,12 +842,12 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  htmlparser2@10.0.0:
+  htmlparser2@10.1.0:
     dependencies:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       domutils: 3.2.2
-      entities: 6.0.1
+      entities: 7.0.1
 
   import-meta-resolve@4.2.0: {}
 
@@ -883,7 +883,7 @@ snapshots:
 
   open@10.2.0:
     dependencies:
-      default-browser: 5.3.0
+      default-browser: 5.4.0
       define-lazy-prop: 3.0.0
       is-inside-container: 1.0.0
       wsl-utils: 0.1.0
@@ -962,12 +962,12 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  vite-plugin-monkey@7.1.5(postcss@8.5.6)(vite@7.3.1):
+  vite-plugin-monkey@7.1.9(postcss@8.5.6)(vite@7.3.1):
     dependencies:
       acorn: 8.15.0
       acorn-walk: 8.3.4
       cross-spawn: 7.0.6
-      htmlparser2: 10.0.0
+      htmlparser2: 10.1.0
       import-meta-resolve: 4.2.0
       magic-string: 0.30.21
       mrmime: 2.0.1
