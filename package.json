@@ -24,8 +24,8 @@
     "@types/crypto-js": "^4.2.2",
     "@types/tampermonkey": "^5.0.5",
     "typescript": "^6.0.2",
-    "vite": "^7.3.1",
-    "vite-plugin-monkey": "^7.1.9"
+    "vite": "^8.0.12",
+    "vite-plugin-monkey": "^8.0.5"
   },
   "dependencies": {
     "crypto-js": "^4.2.0",
